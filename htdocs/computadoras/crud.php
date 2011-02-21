@@ -22,17 +22,17 @@ print_header("$action computadoras");
 
 $row = mysql_fetch_array ( mysql_query("SELECT * FROM `computadoras` WHERE `id` = '$id' "));
 ?>
-<form action="" method="post">
+<form action="<?= $_SERVER['PHP_SELF'] ?>" method="post">
 <fieldset>
 <legend>Add / Edit</legend>
 <div>
 <ul>
   <li><label><span>Procesador:</span>
-    <input type="text" name="procesador" value="<?= stripslashes($row['procesador']) ?>" /></label></li>
+    <input type="text" name="procesador" value="<?= (isset($row['procesador']) ? stripslashes($row['procesador']) : '') ?>" /></label></li>
   <li><label><span>Monitor:</span>
-    <input type="text" name="monitor" value="<?= stripslashes($row['monitor']) ?>" /></label></li>
+    <input type="text" name="monitor" value="<?= (isset($row['monitor']) ? stripslashes($row['monitor']) : '') ?>" /></label></li>
   <li><label><span>Detalles:</span>
-    <input type="text" name="detalles" value="<?= stripslashes($row['detalles']) ?>" /></label></li>
+    <input type="text" name="detalles" value="<?= (isset($row['detalles']) ? stripslashes($row['detalles']) : '') ?>" /></label></li>
 </ul>
 <p><input type="hidden" value="1" name="submitted" />
   <input type="submit" value="Add / Edit" /></p>

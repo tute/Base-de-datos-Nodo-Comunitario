@@ -22,23 +22,23 @@ print_header("$action monitores");
 
 $row = mysql_fetch_array ( mysql_query("SELECT * FROM `monitores` WHERE `id` = '$id' "));
 ?>
-<form action="" method="post">
+<form action="<?= $_SERVER['PHP_SELF'] ?>" method="post">
 <fieldset>
 <legend>Add / Edit</legend>
 <div>
 <ul>
   <li><label><span>Ingreso:</span>
-    <?= input_date('ingreso', $row['ingreso']) ?></label></li>
+    <?= input_date('ingreso', (isset($row['ingreso']) ? stripslashes($row['ingreso']) : '')) ?></label></li>
   <li><label><span>Funciona:</span>
-    <input type="checkbox" name="funciona" value="1" <?= ($row['funciona'] == 1 ? 'checked="checked"' : '') ?> /></label></li>
+    <input type="checkbox" name="funciona" value="1" <?= (isset($row['funciona']) && $row['funciona'] == 1 ? 'checked="checked"' : '') ?> /></label></li>
   <li><label><span>Resolucion:</span>
-    <input type="text" name="resolucion" value="<?= stripslashes($row['resolucion']) ?>" /></label></li>
+    <input type="text" name="resolucion" value="<?= (isset($row['resolucion']) ? stripslashes($row['resolucion']) : '') ?>" /></label></li>
   <li><label><span>Pulgadas:</span>
-    <input type="text" name="pulgadas" value="<?= stripslashes($row['pulgadas']) ?>" /></label></li>
+    <input type="text" name="pulgadas" value="<?= (isset($row['pulgadas']) ? stripslashes($row['pulgadas']) : '') ?>" /></label></li>
   <li><label><span>Marca:</span>
-    <input type="text" name="marca" value="<?= stripslashes($row['marca']) ?>" /></label></li>
+    <input type="text" name="marca" value="<?= (isset($row['marca']) ? stripslashes($row['marca']) : '') ?>" /></label></li>
   <li><label><span>Detalles:</span>
-    <input type="text" name="detalles" value="<?= stripslashes($row['detalles']) ?>" /></label></li>
+    <input type="text" name="detalles" value="<?= (isset($row['detalles']) ? stripslashes($row['detalles']) : '') ?>" /></label></li>
 </ul>
 <p><input type="hidden" value="1" name="submitted" />
   <input type="submit" value="Add / Edit" /></p>

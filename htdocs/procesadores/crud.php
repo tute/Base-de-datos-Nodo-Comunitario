@@ -22,21 +22,21 @@ print_header("$action procesadores");
 
 $row = mysql_fetch_array ( mysql_query("SELECT * FROM `procesadores` WHERE `id` = '$id' "));
 ?>
-<form action="" method="post">
+<form action="<?= $_SERVER['PHP_SELF'] ?>" method="post">
 <fieldset>
 <legend>Add / Edit</legend>
 <div>
 <ul>
   <li><label><span>Ingreso:</span>
-    <?= input_date('ingreso', $row['ingreso']) ?></label></li>
+    <?= input_date('ingreso', (isset($row['ingreso']) ? stripslashes($row['ingreso']) : '')) ?></label></li>
   <li><label><span>Funciona:</span>
-    <input type="checkbox" name="funciona" value="1" <?= ($row['funciona'] == 1 ? 'checked="checked"' : '') ?> /></label></li>
+    <input type="checkbox" name="funciona" value="1" <?= (isset($row['funciona']) && $row['funciona'] == 1 ? 'checked="checked"' : '') ?> /></label></li>
   <li><label><span>Paso Test:</span>
-    <input type="checkbox" name="paso_test" value="1" <?= ($row['paso_test'] == 1 ? 'checked="checked"' : '') ?> /></label></li>
+    <input type="checkbox" name="paso_test" value="1" <?= (isset($row['paso_test']) && $row['paso_test'] == 1 ? 'checked="checked"' : '') ?> /></label></li>
   <li><label><span>Capacidad:</span>
-    <input type="text" name="capacidad" value="<?= stripslashes($row['capacidad']) ?>" /></label></li>
+    <input type="text" name="capacidad" value="<?= (isset($row['capacidad']) ? stripslashes($row['capacidad']) : '') ?>" /></label></li>
   <li><label><span>Detalles:</span>
-    <input type="text" name="detalles" value="<?= stripslashes($row['detalles']) ?>" /></label></li>
+    <input type="text" name="detalles" value="<?= (isset($row['detalles']) ? stripslashes($row['detalles']) : '') ?>" /></label></li>
 </ul>
 <p><input type="hidden" value="1" name="submitted" />
   <input type="submit" value="Add / Edit" /></p>

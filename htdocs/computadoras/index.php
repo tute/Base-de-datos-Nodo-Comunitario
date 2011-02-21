@@ -24,7 +24,9 @@ echo '<table>
     <th>Procesador ' . put_order('procesador') . '</th>
     <th>Monitor ' . put_order('monitor') . '</th>
     <th>Detalles ' . put_order('detalles') . '</th>
-  </tr>';
+    <th colspan="2" style="text-align:center">Actions</th>
+  </tr>
+';
 
 $r = mysql_query($sql) or trigger_error(mysql_error());
 while($row = mysql_fetch_array($r)) {
@@ -35,14 +37,15 @@ while($row = mysql_fetch_array($r)) {
     <td>' . $row['detalles'] . '</td>
     <td><a href="crud.php?id=' . $row['id'] . '">Edit</a></td>
     <td><a href="crud.php?delete=1&amp;id=' . $row['id'] . '" onclick="return confirm(\'Are you sure?\')">Delete</a></td>
-  </tr>';
+  </tr>' . "
+";
 }
 
-echo '</table>
-
-<p><a href="crud.php">New entry</a></p>';
+echo "</table>\n\n";
 
 include('../inc.paging.php');
+
+echo '<p><a href="crud.php">New entry</a></p>';
 
 print_footer();
 ?>

@@ -39,9 +39,9 @@ function input_date($field, $value) {
 	$mth  = $field . '_mth';
 	$year = $field . '_year';
 
-	$sel_day  = (substr($value,8,2) ? substr($value,8,2) : date(d));
-	$sel_mth  = (substr($value,5,2) ? substr($value,5,2) : date(m));
-	$sel_year = (substr($value,0,4) > 0 ? substr($value,0,4) : date(Y));
+	$sel_day  = (substr($value,8,2) ? substr($value,8,2) : date('d'));
+	$sel_mth  = (substr($value,5,2) ? substr($value,5,2) : date('m'));
+	$sel_year = (substr($value,0,4) > 0 ? substr($value,0,4) : date('Y'));
 
 	$ret = select_range($day, $sel_day, 1, 31) . '/';
 	$ret .= select_range($mth, $sel_mth, 1, 12) . '/';
@@ -55,9 +55,9 @@ function input_datetime($field, $value) {
 	$min  = $field . '_min';
 	$hour = $field . '_hour';
 
-	$sel_seg  = (substr($value,17,2) ? substr($value,17,2) : date(s));
-	$sel_min  = (substr($value,14,2) ? substr($value,14,2) : date(i));
-	$sel_hour = (substr($value,11,2) ? substr($value,11,2) : date(h));
+	$sel_seg  = (substr($value,17,2) ? substr($value,17,2) : date('s'));
+	$sel_min  = (substr($value,14,2) ? substr($value,14,2) : date('i'));
+	$sel_hour = (substr($value,11,2) ? substr($value,11,2) : date('h'));
 
 	$ret = input_date($field, $value) . ' @ ';
 	$ret .= select_range($hour, $sel_hour, 0, 23) . ':';
@@ -143,6 +143,9 @@ function search_by($var) {
 }
 
 function put_order($col) {
+	if (!isset($_SERVER['argv'][0])) {
+		$_SERVER['argv'][0] = '';
+	}
 	$pars = explode("[&]", $_SERVER['argv'][0]);
 	$res = array();
 	foreach($pars as $n => $par) {
@@ -167,6 +170,20 @@ function limit_chars($str, $lim = 150) {
 	$words = explode(' ', substr($str, 0, $lim));
 	$cut = (strlen($str) > $lim);
 	return implode(' ', array_slice($words, 0, count($words)-$cut)) . ($cut ? '...' : '');
+}
+
+/* List crud directories */
+function list_cruds() {
+	$filter = array('.', '..', 'css');
+	echo '<ul>';
+	if ($handle = opendir('..')) {
+		while (false !== ($file = readdir($handle))) {
+			if (is_dir("../$file") && !in_array($file, $filter))
+				echo "  <li><a href=\"../$file/\">$file</a></li>\n";
+		}
+		closedir($handle);
+	}
+	echo '</ul>';
 }
 
 function humanize($date) {

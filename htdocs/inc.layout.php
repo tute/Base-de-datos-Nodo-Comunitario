@@ -13,22 +13,14 @@ function print_header($title) {
 
 <body>
 <h1><a href="../"><?= $title ?> - Nodo Comunitario (Exactas)</a>
-  <? if ($_SESSION['user_logged_in'] == true) echo '<span style="font-size:12px"><a href="../inc.auth.php?action=logout&amp;msg=You have been logged out.">[Logout]</a></p>'; ?></h1>
+  <? if (isset($_SESSION) && $_SESSION['user_logged_in'] == true) echo '<span style="font-size:12px"><a href="../inc.auth.php?action=logout&amp;msg=You have been logged out.">[Logout]</a></p>'; ?></h1>
 <?
 }
 
 function print_footer() {
 	$index = preg_match('/index.php/', $_SERVER['PHP_SELF']);
 	$login = preg_match('/inc.auth.php/', $_SERVER['PHP_SELF']);
-	?>
-<ul>
-  <li><a href="../computadoras">Computadoras</a></li>
-  <li><a href="../discos">Discos</a></li>
-  <li><a href="../memorias">Memorias</a></li>
-  <li><a href="../monitores">Monitores</a></li>
-  <li><a href="../procesadores">Procesadores</a></li>
-</ul>
-	<?
+	echo list_cruds();
 	if (!$index and !$login)
 		echo '<p><a href="index.php">Back to Listing</a></p>';
 	echo "</body>\n</html>";
