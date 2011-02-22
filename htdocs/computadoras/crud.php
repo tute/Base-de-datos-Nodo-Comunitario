@@ -22,7 +22,7 @@ print_header("$action computadoras");
 
 $row = mysql_fetch_array ( mysql_query("SELECT * FROM `computadoras` WHERE `id` = '$id' "));
 ?>
-<form action="<?= $_SERVER['PHP_SELF'] ?>" method="post">
+<form action="<?= $_SERVER['REQUEST_URI'] ?>" method="post">
 <fieldset>
 <legend>Add / Edit</legend>
 <div>

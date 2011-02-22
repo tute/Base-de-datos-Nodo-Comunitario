@@ -1,4 +1,4 @@
-<form action="<?= $_SERVER['PHP_SELF'] ?>" method="get">
+<form action="<?= $_SERVER['REQUEST_URI'] ?>" method="get">
 <fieldset>
 <legend><a href="#" onclick="$('#search-form').slideToggle()">Search</a></legend>
 <div id="search-form" style="display:none">
