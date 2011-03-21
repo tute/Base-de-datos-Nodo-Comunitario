@@ -8,7 +8,7 @@
     <?= input_date('ingreso', (isset($_GET['ingreso']) ? stripslashes($_GET['ingreso']) : '')) ?></li>
   <li><label><span>Funciona:</span>
     <?= search_options('funciona', (isset($_GET['funciona_opts']) ? stripslashes($_GET['funciona_opts']) : '')) ?></label>
-    <input type="checkbox" name="funciona" value="1" <?= (isset($_GET['funciona']) && $_GET['funciona'] == 1 ? 'checked="checked"' : '') ?> /></li>
+    <input type="checkbox" name="funciona" value="1" <?= (isset($_GET['funciona']) && $_GET['funciona'] ? 'checked="checked"' : '') ?> /></li>
   <li><label><span>Resolucion:</span>
     <?= search_options('resolucion', (isset($_GET['resolucion_opts']) ? stripslashes($_GET['resolucion_opts']) : '')) ?></label>
     <input type="text" name="resolucion" value="<?= (isset($_GET['resolucion']) ? stripslashes($_GET['resolucion']) : '') ?>" /></li>

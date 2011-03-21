@@ -1,7 +1,7 @@
 <?php
 include('../inc.functions.php');
 
-print_header('Procesadores');
+print_header('NodoComunitario » Procesadores');
 
 if (isset($_GET['msg'])) echo '<p id="msg">'.$_GET['msg'].'</p>';
 
@@ -11,7 +11,7 @@ include('inc.search.php');
 
 /* Default paging criteria (may be overriden by paging functions) */
 $start     = 0;
-$per_page  = 100;
+$per_page  = 50;
 $count_sql = 'SELECT COUNT(id) AS tot FROM `procesadores` WHERE ' . $conds;
 include('../inc.paging.php');
 
@@ -33,12 +33,12 @@ echo '<table>
 $r = mysql_query($sql) or trigger_error(mysql_error());
 while($row = mysql_fetch_array($r)) {
 	echo '  <tr>
-    <td>' . $row['id'] . '</td>
-    <td>' . humanize($row['ingreso']) . '</td>
+    <td>' . htmlentities($row['id']) . '</td>
+    <td>' . htmlentities(humanize($row['ingreso'])) . '</td>
     <td>' . ($row['funciona'] ? 'Yes' : 'No') . '</td>
     <td>' . ($row['paso_test'] ? 'Yes' : 'No') . '</td>
-    <td>' . $row['capacidad'] . '</td>
-    <td>' . $row['detalles'] . '</td>
+    <td>' . htmlentities($row['capacidad']) . '</td>
+    <td>' . htmlentities($row['detalles']) . '</td>
     <td><a href="crud.php?id=' . $row['id'] . '">Edit</a></td>
     <td><a href="crud.php?delete=1&amp;id=' . $row['id'] . '" onclick="return confirm(\'Are you sure?\')">Delete</a></td>
   </tr>' . "

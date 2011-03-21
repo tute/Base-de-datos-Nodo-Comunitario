@@ -8,17 +8,18 @@ if (isset($_GET['delete'])) {
 }
 
 $id = (isset($_GET['id']) ? $_GET['id'] : 0);
-$action = ($id ? 'Edit' : 'Add new');
+$action = ($id ? 'Editing' : 'Add new') . ' entry';
 
 if (isset($_POST['submitted'])) {
 	foreach($_POST AS $key => $value) { $_POST[$key] = mysql_real_escape_string($value); }
-	$sql = "REPLACE INTO `computadoras` (`id`, `procesador`, `monitor`, `detalles`) VALUES ($id, '$_POST[procesador]', '$_POST[monitor]', '$_POST[detalles]');";
+	$sql = "REPLACE INTO `computadoras` (`id`, `detalles`, `procesador`, `monitor`) VALUES ('$id', '$_POST[detalles]', '$_POST[procesador]', '$_POST[monitor]');";
 	mysql_query($sql) or die(mysql_error());
 	$msg = (mysql_affected_rows()) ? 'Edited row.' : 'Nothing changed.';
 	header('Location: index.php?msg='.$msg);
 }
 
-print_header("$action computadoras");
+
+print_header("NodoComunitario » Computadoras » $action");
 
 $row = mysql_fetch_array ( mysql_query("SELECT * FROM `computadoras` WHERE `id` = '$id' "));
 ?>
@@ -27,12 +28,12 @@ $row = mysql_fetch_array ( mysql_query("SELECT * FROM `computadoras` WHERE `id` 
 <legend>Add / Edit</legend>
 <div>
 <ul>
+  <li><label><span>Detalles:</span>
+    <textarea name="detalles" cols="40" rows="10"><?= (isset($row['detalles']) ? stripslashes($row['detalles']) : '') ?></textarea></label></li>
   <li><label><span>Procesador:</span>
     <input type="text" name="procesador" value="<?= (isset($row['procesador']) ? stripslashes($row['procesador']) : '') ?>" /></label></li>
   <li><label><span>Monitor:</span>
     <input type="text" name="monitor" value="<?= (isset($row['monitor']) ? stripslashes($row['monitor']) : '') ?>" /></label></li>
-  <li><label><span>Detalles:</span>
-    <input type="text" name="detalles" value="<?= (isset($row['detalles']) ? stripslashes($row['detalles']) : '') ?>" /></label></li>
 </ul>
 <p><input type="hidden" value="1" name="submitted" />
   <input type="submit" value="Add / Edit" /></p>

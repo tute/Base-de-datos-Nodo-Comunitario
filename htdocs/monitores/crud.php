@@ -8,17 +8,18 @@ if (isset($_GET['delete'])) {
 }
 
 $id = (isset($_GET['id']) ? $_GET['id'] : 0);
-$action = ($id ? 'Edit' : 'Add new');
+$action = ($id ? 'Editing' : 'Add new') . ' entry';
 
 if (isset($_POST['submitted'])) {
 	foreach($_POST AS $key => $value) { $_POST[$key] = mysql_real_escape_string($value); }
-	$sql = "REPLACE INTO `monitores` (`id`, `ingreso`, `funciona`, `resolucion`, `pulgadas`, `marca`, `detalles`) VALUES ($id, '$_POST[ingreso_year]-$_POST[ingreso_mth]-$_POST[ingreso_day]', '$_POST[funciona]', '$_POST[resolucion]', '$_POST[pulgadas]', '$_POST[marca]', '$_POST[detalles]');";
+	$sql = "REPLACE INTO `monitores` (`id`, `ingreso`, `funciona`, `resolucion`, `pulgadas`, `marca`, `detalles`) VALUES ('$id', '$_POST[ingreso_year]-$_POST[ingreso_mth]-$_POST[ingreso_day]', '$_POST[funciona]', '$_POST[resolucion]', '$_POST[pulgadas]', '$_POST[marca]', '$_POST[detalles]');";
 	mysql_query($sql) or die(mysql_error());
 	$msg = (mysql_affected_rows()) ? 'Edited row.' : 'Nothing changed.';
 	header('Location: index.php?msg='.$msg);
 }
 
-print_header("$action monitores");
+
+print_header("NodoComunitario » Monitores » $action");
 
 $row = mysql_fetch_array ( mysql_query("SELECT * FROM `monitores` WHERE `id` = '$id' "));
 ?>
@@ -30,7 +31,7 @@ $row = mysql_fetch_array ( mysql_query("SELECT * FROM `monitores` WHERE `id` = '
   <li><label><span>Ingreso:</span>
     <?= input_date('ingreso', (isset($row['ingreso']) ? stripslashes($row['ingreso']) : '')) ?></label></li>
   <li><label><span>Funciona:</span>
-    <input type="checkbox" name="funciona" value="1" <?= (isset($row['funciona']) && $row['funciona'] == 1 ? 'checked="checked"' : '') ?> /></label></li>
+    <input type="checkbox" name="funciona" value="1" <?= (isset($row['funciona']) && $row['funciona'] ? 'checked="checked"' : '') ?> /></label></li>
   <li><label><span>Resolucion:</span>
     <input type="text" name="resolucion" value="<?= (isset($row['resolucion']) ? stripslashes($row['resolucion']) : '') ?>" /></label></li>
   <li><label><span>Pulgadas:</span>

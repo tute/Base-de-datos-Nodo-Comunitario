@@ -8,17 +8,18 @@ if (isset($_GET['delete'])) {
 }
 
 $id = (isset($_GET['id']) ? $_GET['id'] : 0);
-$action = ($id ? 'Edit' : 'Add new');
+$action = ($id ? 'Editing' : 'Add new') . ' entry';
 
 if (isset($_POST['submitted'])) {
 	foreach($_POST AS $key => $value) { $_POST[$key] = mysql_real_escape_string($value); }
-	$sql = "REPLACE INTO `procesadores` (`id`, `ingreso`, `funciona`, `paso_test`, `capacidad`, `detalles`) VALUES ($id, '$_POST[ingreso_year]-$_POST[ingreso_mth]-$_POST[ingreso_day]', '$_POST[funciona]', '$_POST[paso_test]', '$_POST[capacidad]', '$_POST[detalles]');";
+	$sql = "REPLACE INTO `procesadores` (`id`, `ingreso`, `funciona`, `paso_test`, `capacidad`, `detalles`) VALUES ('$id', '$_POST[ingreso_year]-$_POST[ingreso_mth]-$_POST[ingreso_day]', '$_POST[funciona]', '$_POST[paso_test]', '$_POST[capacidad]', '$_POST[detalles]');";
 	mysql_query($sql) or die(mysql_error());
 	$msg = (mysql_affected_rows()) ? 'Edited row.' : 'Nothing changed.';
 	header('Location: index.php?msg='.$msg);
 }
 
-print_header("$action procesadores");
+
+print_header("NodoComunitario » Procesadores » $action");
 
 $row = mysql_fetch_array ( mysql_query("SELECT * FROM `procesadores` WHERE `id` = '$id' "));
 ?>
@@ -30,9 +31,9 @@ $row = mysql_fetch_array ( mysql_query("SELECT * FROM `procesadores` WHERE `id` 
   <li><label><span>Ingreso:</span>
     <?= input_date('ingreso', (isset($row['ingreso']) ? stripslashes($row['ingreso']) : '')) ?></label></li>
   <li><label><span>Funciona:</span>
-    <input type="checkbox" name="funciona" value="1" <?= (isset($row['funciona']) && $row['funciona'] == 1 ? 'checked="checked"' : '') ?> /></label></li>
+    <input type="checkbox" name="funciona" value="1" <?= (isset($row['funciona']) && $row['funciona'] ? 'checked="checked"' : '') ?> /></label></li>
   <li><label><span>Paso Test:</span>
-    <input type="checkbox" name="paso_test" value="1" <?= (isset($row['paso_test']) && $row['paso_test'] == 1 ? 'checked="checked"' : '') ?> /></label></li>
+    <input type="checkbox" name="paso_test" value="1" <?= (isset($row['paso_test']) && $row['paso_test'] ? 'checked="checked"' : '') ?> /></label></li>
   <li><label><span>Capacidad:</span>
     <input type="text" name="capacidad" value="<?= (isset($row['capacidad']) ? stripslashes($row['capacidad']) : '') ?>" /></label></li>
   <li><label><span>Detalles:</span>

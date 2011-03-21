@@ -8,10 +8,10 @@
     <?= input_date('ingreso', (isset($_GET['ingreso']) ? stripslashes($_GET['ingreso']) : '')) ?></li>
   <li><label><span>Funciona:</span>
     <?= search_options('funciona', (isset($_GET['funciona_opts']) ? stripslashes($_GET['funciona_opts']) : '')) ?></label>
-    <input type="checkbox" name="funciona" value="1" <?= (isset($_GET['funciona']) && $_GET['funciona'] == 1 ? 'checked="checked"' : '') ?> /></li>
+    <input type="checkbox" name="funciona" value="1" <?= (isset($_GET['funciona']) && $_GET['funciona'] ? 'checked="checked"' : '') ?> /></li>
   <li><label><span>Paso Test:</span>
     <?= search_options('paso_test', (isset($_GET['paso_test_opts']) ? stripslashes($_GET['paso_test_opts']) : '')) ?></label>
-    <input type="checkbox" name="paso_test" value="1" <?= (isset($_GET['paso_test']) && $_GET['paso_test'] == 1 ? 'checked="checked"' : '') ?> /></li>
+    <input type="checkbox" name="paso_test" value="1" <?= (isset($_GET['paso_test']) && $_GET['paso_test'] ? 'checked="checked"' : '') ?> /></li>
   <li><label><span>Capacidad:</span>
     <?= search_options('capacidad', (isset($_GET['capacidad_opts']) ? stripslashes($_GET['capacidad_opts']) : '')) ?></label>
     <input type="text" name="capacidad" value="<?= (isset($_GET['capacidad']) ? stripslashes($_GET['capacidad']) : '') ?>" /></li>

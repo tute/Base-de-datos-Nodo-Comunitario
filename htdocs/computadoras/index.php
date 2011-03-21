@@ -1,7 +1,7 @@
 <?php
 include('../inc.functions.php');
 
-print_header('Computadoras');
+print_header('NodoComunitario » Computadoras');
 
 if (isset($_GET['msg'])) echo '<p id="msg">'.$_GET['msg'].'</p>';
 
@@ -11,7 +11,7 @@ include('inc.search.php');
 
 /* Default paging criteria (may be overriden by paging functions) */
 $start     = 0;
-$per_page  = 100;
+$per_page  = 50;
 $count_sql = 'SELECT COUNT(id) AS tot FROM `computadoras` WHERE ' . $conds;
 include('../inc.paging.php');
 
@@ -21,9 +21,9 @@ $sql = "SELECT * FROM `computadoras` WHERE $conds " . get_order('computadoras') 
 echo '<table>
   <tr>
     <th>Id ' . put_order('id') . '</th>
+    <th>Detalles ' . put_order('detalles') . '</th>
     <th>Procesador ' . put_order('procesador') . '</th>
     <th>Monitor ' . put_order('monitor') . '</th>
-    <th>Detalles ' . put_order('detalles') . '</th>
     <th colspan="2" style="text-align:center">Actions</th>
   </tr>
 ';
@@ -31,10 +31,10 @@ echo '<table>
 $r = mysql_query($sql) or trigger_error(mysql_error());
 while($row = mysql_fetch_array($r)) {
 	echo '  <tr>
-    <td>' . $row['id'] . '</td>
-    <td>' . $row['procesador'] . '</td>
-    <td>' . $row['monitor'] . '</td>
-    <td>' . $row['detalles'] . '</td>
+    <td>' . htmlentities($row['id']) . '</td>
+    <td>' . htmlentities(limit_chars(nl2br($row['detalles']))) . '</td>
+    <td>' . htmlentities($row['procesador']) . '</td>
+    <td>' . htmlentities($row['monitor']) . '</td>
     <td><a href="crud.php?id=' . $row['id'] . '">Edit</a></td>
     <td><a href="crud.php?delete=1&amp;id=' . $row['id'] . '" onclick="return confirm(\'Are you sure?\')">Delete</a></td>
   </tr>' . "

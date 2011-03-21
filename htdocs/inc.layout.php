@@ -12,8 +12,8 @@ function print_header($title) {
 </head>
 
 <body>
-<h1><a href="../"><?= $title ?> - Nodo Comunitario (Exactas)</a>
-  <? if (isset($_SESSION) && $_SESSION['user_logged_in'] == true) echo '<span style="font-size:12px"><a href="../inc.auth.php?action=logout&amp;msg=You have been logged out.">[Logout]</a></p>'; ?></h1>
+<h1><a href="../"><?= $title ?></a>
+  <? if (isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] === true) echo '<span style="font-size:12px"><a href="../inc.auth.php?action=logout&amp;msg=You have been logged out.">[Logout]</a></p>'; ?></h1>
 <?
 }
 
