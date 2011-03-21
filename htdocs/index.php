@@ -1,3 +1,3 @@
 <?
-header('Location: procesadores/')
+header('Location: computadoras/')
 ?>

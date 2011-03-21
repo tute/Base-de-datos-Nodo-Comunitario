@@ -11,7 +11,7 @@ CREATE TABLE `computadoras` (
 DROP TABLE IF EXISTS `discos`;
 CREATE TABLE `discos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `ingreso` DATE NOT NULL DEFAULT CURRENT_DATE,
+  `ingreso` DATE,
   `funciona` INT(1) DEFAULT NULL,
   `capacidad` int(11) NOT NULL,
   `marca` char(32) DEFAULT NULL,
@@ -23,7 +23,7 @@ CREATE TABLE `discos` (
 DROP TABLE IF EXISTS `memorias`;
 CREATE TABLE `memorias` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `ingreso` DATE NOT NULL DEFAULT CURRENT_DATE,
+  `ingreso` DATE,
   `funciona` INT(1) DEFAULT NULL,
   `paso_test` INT(1) DEFAULT NULL,
   `capacidad` int(11) NOT NULL,
@@ -34,7 +34,7 @@ CREATE TABLE `memorias` (
 DROP TABLE IF EXISTS `monitores`;
 CREATE TABLE `monitores` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `ingreso` DATE NOT NULL DEFAULT CURRENT_DATE,
+  `ingreso` DATE,
   `funciona` tinyint(1) DEFAULT NULL,
   `resolucion` int(11) DEFAULT NULL,
   `pulgadas` int(11) NOT NULL DEFAULT '14',
@@ -47,7 +47,7 @@ CREATE TABLE `monitores` (
 DROP TABLE IF EXISTS `procesadores`;
 CREATE TABLE `procesadores` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `ingreso` DATE NOT NULL DEFAULT CURRENT_DATE,
+  `ingreso` DATE,
   `funciona` INT(1) DEFAULT NULL,
   `paso_test` INT(1) DEFAULT NULL,
   `capacidad` int(11) NOT NULL,
