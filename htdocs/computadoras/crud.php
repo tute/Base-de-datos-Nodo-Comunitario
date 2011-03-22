@@ -12,7 +12,7 @@ $action = ($id ? 'Editing' : 'Add new') . ' entry';
 
 if (isset($_POST['submitted'])) {
 	foreach($_POST AS $key => $value) { $_POST[$key] = mysql_real_escape_string($value); }
-	$sql = "REPLACE INTO `computadoras` (`id`, `nombre`, `procesador`, `disco_rigido`, `RAM`, `detalles`) VALUES ('$id', '$_POST[nombre]', '$_POST[procesador]', '$_POST[disco_rigido]', '$_POST[RAM]', '$_POST[detalles]');";
+	$sql = "REPLACE INTO `computadoras` (`id`, `nombre`, `procesador_id`, `disco_rigido`, `memoria`, `descartada`, `detalles`) VALUES ('$id', '$_POST[nombre]', '$_POST[procesador_id]', '$_POST[disco_rigido]', '$_POST[memoria]', '$_POST[descartada]', '$_POST[detalles]');";
 	mysql_query($sql) or die(mysql_error());
 	$msg = (mysql_affected_rows()) ? 'Edited row.' : 'Nothing changed.';
 	header('Location: index.php?msg='.$msg);
@@ -30,12 +30,14 @@ $row = mysql_fetch_array ( mysql_query("SELECT * FROM `computadoras` WHERE `id` 
 <ul>
   <li><label><span>Nombre:</span>
     <input type="text" name="nombre" value="<?= (isset($row['nombre']) ? stripslashes($row['nombre']) : '') ?>" /></label></li>
-  <li><label><span>Procesador:</span>
-    <input type="text" name="procesador" value="<?= (isset($row['procesador']) ? stripslashes($row['procesador']) : '') ?>" /></label></li>
+  <li><label><span>Procesador Id:</span>
+    <input type="text" name="procesador_id" value="<?= (isset($row['procesador_id']) ? stripslashes($row['procesador_id']) : '') ?>" /></label></li>
   <li><label><span>Disco Rigido:</span>
     <input type="text" name="disco_rigido" value="<?= (isset($row['disco_rigido']) ? stripslashes($row['disco_rigido']) : '') ?>" /></label></li>
-  <li><label><span>RAM:</span>
-    <input type="text" name="RAM" value="<?= (isset($row['RAM']) ? stripslashes($row['RAM']) : '') ?>" /></label></li>
+  <li><label><span>Memoria:</span>
+    <input type="text" name="memoria" value="<?= (isset($row['memoria']) ? stripslashes($row['memoria']) : '') ?>" /></label></li>
+  <li><label><span>Descartada:</span>
+    <input type="checkbox" name="descartada" value="1" <?= (isset($row['descartada']) && $row['descartada'] ? 'checked="checked"' : '') ?> /></label></li>
   <li><label><span>Detalles:</span>
     <textarea name="detalles" cols="40" rows="10"><?= (isset($row['detalles']) ? stripslashes($row['detalles']) : '') ?></textarea></label></li>
 </ul>

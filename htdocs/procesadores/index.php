@@ -21,11 +21,7 @@ $sql = "SELECT * FROM `procesadores` WHERE $conds " . get_order('procesadores') 
 echo '<table>
   <tr>
     <th>Id ' . put_order('id') . '</th>
-    <th>Ingreso ' . put_order('ingreso') . '</th>
-    <th>Funciona ' . put_order('funciona') . '</th>
-    <th>Paso Test ' . put_order('paso_test') . '</th>
-    <th>Capacidad ' . put_order('capacidad') . '</th>
-    <th>Detalles ' . put_order('detalles') . '</th>
+    <th>Nombre ' . put_order('nombre') . '</th>
     <th colspan="2" style="text-align:center">Actions</th>
   </tr>
 ';
@@ -34,11 +30,7 @@ $r = mysql_query($sql) or trigger_error(mysql_error());
 while($row = mysql_fetch_array($r)) {
 	echo '  <tr>
     <td>' . htmlentities($row['id']) . '</td>
-    <td>' . htmlentities(humanize($row['ingreso'])) . '</td>
-    <td>' . ($row['funciona'] ? 'Yes' : 'No') . '</td>
-    <td>' . ($row['paso_test'] ? 'Yes' : 'No') . '</td>
-    <td>' . htmlentities($row['capacidad']) . '</td>
-    <td>' . htmlentities($row['detalles']) . '</td>
+    <td>' . htmlentities($row['nombre']) . '</td>
     <td><a href="crud.php?id=' . $row['id'] . '">Edit</a></td>
     <td><a href="crud.php?delete=1&amp;id=' . $row['id'] . '" onclick="return confirm(\'Are you sure?\')">Delete</a></td>
   </tr>' . "
