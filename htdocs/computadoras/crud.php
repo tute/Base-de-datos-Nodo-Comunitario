@@ -31,7 +31,7 @@ $row = mysql_fetch_array ( mysql_query("SELECT * FROM `computadoras` WHERE `id` 
   <li><label><span>Nombre:</span>
     <input type="text" name="nombre" value="<?= (isset($row['nombre']) ? stripslashes($row['nombre']) : '') ?>" /></label></li>
   <li><label><span>Procesador Id:</span>
-    <input type="text" name="procesador_id" value="<?= (isset($row['procesador_id']) ? stripslashes($row['procesador_id']) : '') ?>" /></label></li>
+    <?= build_options('procesadores', 'nombre', 'procesadores_id', (isset($row['procesador_id']) ? stripslashes($row['procesador_id']) : '')) ?></label></li>
   <li><label><span>Disco Rigido:</span>
     <input type="text" name="disco_rigido" value="<?= (isset($row['disco_rigido']) ? stripslashes($row['disco_rigido']) : '') ?>" /></label></li>
   <li><label><span>Memoria:</span>
