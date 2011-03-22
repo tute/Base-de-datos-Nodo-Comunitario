@@ -1,9 +1,11 @@
 DROP TABLE IF EXISTS `computadoras`;
 CREATE TABLE `computadoras` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(255) NOT NULL DEFAULT '1',
+  `procesador` varchar(255) NOT NULL DEFAULT '1',
+  `disco_rigido` varchar(255) NOT NULL DEFAULT '1',
+  `RAM` varchar(255) NOT NULL DEFAULT '1',
   `detalles` text DEFAULT NULL,
-  `procesador` int(11) NOT NULL DEFAULT '1',
-  `monitor` int(11) DEFAULT '1',
   PRIMARY KEY (`id`),
   KEY `procesador` (`procesador`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

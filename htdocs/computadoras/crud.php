@@ -12,7 +12,7 @@ $action = ($id ? 'Editing' : 'Add new') . ' entry';
 
 if (isset($_POST['submitted'])) {
 	foreach($_POST AS $key => $value) { $_POST[$key] = mysql_real_escape_string($value); }
-	$sql = "REPLACE INTO `computadoras` (`id`, `detalles`, `procesador`, `monitor`) VALUES ('$id', '$_POST[detalles]', '$_POST[procesador]', '$_POST[monitor]');";
+	$sql = "REPLACE INTO `computadoras` (`id`, `nombre`, `procesador`, `disco_rigido`, `RAM`, `detalles`) VALUES ('$id', '$_POST[nombre]', '$_POST[procesador]', '$_POST[disco_rigido]', '$_POST[RAM]', '$_POST[detalles]');";
 	mysql_query($sql) or die(mysql_error());
 	$msg = (mysql_affected_rows()) ? 'Edited row.' : 'Nothing changed.';
 	header('Location: index.php?msg='.$msg);
@@ -28,12 +28,16 @@ $row = mysql_fetch_array ( mysql_query("SELECT * FROM `computadoras` WHERE `id` 
 <legend>Add / Edit</legend>
 <div>
 <ul>
-  <li><label><span>Detalles:</span>
-    <textarea name="detalles" cols="40" rows="10"><?= (isset($row['detalles']) ? stripslashes($row['detalles']) : '') ?></textarea></label></li>
+  <li><label><span>Nombre:</span>
+    <input type="text" name="nombre" value="<?= (isset($row['nombre']) ? stripslashes($row['nombre']) : '') ?>" /></label></li>
   <li><label><span>Procesador:</span>
     <input type="text" name="procesador" value="<?= (isset($row['procesador']) ? stripslashes($row['procesador']) : '') ?>" /></label></li>
-  <li><label><span>Monitor:</span>
-    <input type="text" name="monitor" value="<?= (isset($row['monitor']) ? stripslashes($row['monitor']) : '') ?>" /></label></li>
+  <li><label><span>Disco Rigido:</span>
+    <input type="text" name="disco_rigido" value="<?= (isset($row['disco_rigido']) ? stripslashes($row['disco_rigido']) : '') ?>" /></label></li>
+  <li><label><span>RAM:</span>
+    <input type="text" name="RAM" value="<?= (isset($row['RAM']) ? stripslashes($row['RAM']) : '') ?>" /></label></li>
+  <li><label><span>Detalles:</span>
+    <textarea name="detalles" cols="40" rows="10"><?= (isset($row['detalles']) ? stripslashes($row['detalles']) : '') ?></textarea></label></li>
 </ul>
 <p><input type="hidden" value="1" name="submitted" />
   <input type="submit" value="Add / Edit" /></p>
